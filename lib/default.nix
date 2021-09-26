@@ -14,7 +14,7 @@
       modules = [ ../hosts/${host} ]
       # Plus system-level user config for each user
         ++ inputs.nixpkgs.lib.forEach users (user: ../users/${user})
-        # And each user's home-manager config
+         # And each user's home-manager config
         ++ [
           inputs.home-manager.nixosModules.home-manager
           {

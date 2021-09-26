@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-  # Require /data/home to be mounted at boot
-  fileSystems."/data/home".neededForBoot = true;
+  # Require /data to be mounted at boot
+  fileSystems."/data".neededForBoot = true;
 
   # User info
   users.users.rakki = {

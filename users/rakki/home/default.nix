@@ -6,7 +6,7 @@
   ];
 
   # Persistência
-  home.persisence = {
+  home.persistence = {
     "/data/home/rakki" = {
       # Permitir que o root acesse
       allowOther = true;
@@ -67,6 +67,7 @@
     lutris
     steam
     multimc
+    discord
 
     # Fontes
     # Fira Sans
@@ -79,14 +80,19 @@
   # Registrar fontes instaladas
   fonts.fontconfig.enable = true;
 
+  # Habilitar e configurar alacritty
+  programs.alacritty = {
+    enable = true;
+  };
 
   # Habilitar e configurar fish
   programs.fish = {
     enable = true;
-    shellAbbrs = {
+    shellAliases = {
+      rnix = "sudo nixos-rebuild switch --flake /dotfiles";
       # Exemplo de abreviações configuradas pelo nix
       ls = "exa";
-      vi = "nvim";
+      v = "nvim";
       vim = "nvim";
     };
   };

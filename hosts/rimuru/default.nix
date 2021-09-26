@@ -13,9 +13,11 @@
     impermanence.nixosModules.impermanence
   ];
 
+fileSystems."/data".neededForBoot = true;
+
   # Persistir algumas pastas do sistema
   # Pra os timers do systemd e logs funcionarem certo entre reboots
-  environemtnt.persistence."/data" = {
+  environment.persistence."/data" = {
     directories = [
       # Logs do sistema
       "/var/log"
@@ -118,6 +120,8 @@
     };
     # Gamemode
     gamemode.enable = true;
+    # fuse
+    fuse.userAllowOther = true;
     # KDEConnect
     kdeconnect.enable = true;
     # Steam
@@ -141,5 +145,7 @@
     opentabletdriver.enable = true;
     # PulseAudio
     pulseaudio.enable = true;
+    # Desabilitar offload PRIME
+    nvidia.prime.offload.enable = false;
   };
 }

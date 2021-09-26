@@ -4,63 +4,45 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot.initrd.availableKernelModules =
-    [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.luks.devices."nixenc".device =
-    "/dev/disk/by-uuid/320599e3-21f9-465e-a2f2-d078eccc34c0";
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems = {
-    "/" = {
-      device = "none";
+  boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/2961a2a6-54b0-43df-bab5-4b02e8b19ba7";
+
+  fileSystems."/" =
+    { device = "none";
       fsType = "tmpfs";
       options = [ "defaults" "size=4G" "mode=755" ];
     };
 
-    "/boot" = {
-      device = "/dev/disk/by-uuid/28E4-87AC";
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/2B35-5F2E";
       fsType = "vfat";
     };
 
-    "/data/games" = {
-      device = "/dev/disk/by-uuid/53b00f4f-1dee-4aae-bc96-3982f2b04c90";
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/074c9623-e2f2-4455-8445-3a3444fd135f";
       fsType = "btrfs";
-      options = [ "subvol=data/games" "compress=zstd" ];
+      options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
-    "/data/home" = {
-      device = "/dev/disk/by-uuid/53b00f4f-1dee-4aae-bc96-3982f2b04c90";
+  fileSystems."/data" =
+    { device = "/dev/disk/by-uuid/074c9623-e2f2-4455-8445-3a3444fd135f";
       fsType = "btrfs";
-      options = [ "subvol=data/home" "compress=zstd" ];
+      options = [ "subvol=data" "compress=zstd" ];
     };
 
-    "/data/srv" = {
-      device = "/dev/disk/by-uuid/53b00f4f-1dee-4aae-bc96-3982f2b04c90";
-      fsType = "btrfs";
-      options = [ "subvol=data/srv" "compress=zstd" ];
-    };
-
-    "/data/var" = {
-      device = "/dev/disk/by-uuid/53b00f4f-1dee-4aae-bc96-3982f2b04c90";
-      fsType = "btrfs";
-      options = [ "subvol=data/var" "compress=zstd" ];
-    };
-
-    "/dotfiles" = {
-      device = "/dev/disk/by-uuid/53b00f4f-1dee-4aae-bc96-3982f2b04c90";
+  fileSystems."/dotfiles" =
+    { device = "/dev/disk/by-uuid/074c9623-e2f2-4455-8445-3a3444fd135f";
       fsType = "btrfs";
       options = [ "subvol=dotfiles" "compress=zstd" ];
     };
 
-    "/nix" = {
-      device = "/dev/disk/by-uuid/53b00f4f-1dee-4aae-bc96-3982f2b04c90";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "noatime" "compress=zstd" ];
-    };
-  };
-
   swapDevices = [ ];
-
 }
