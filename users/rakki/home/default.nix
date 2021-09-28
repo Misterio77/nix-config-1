@@ -2,7 +2,12 @@
 
   # Importar nvim.nix
   imports = [
+    ./fish.nix
     ./nvim.nix
+    ./neofetch.nix
+    ./i3.nix
+    ./polybar.nix
+    ./alacritty.nix
   ];
 
   # Persistência
@@ -19,6 +24,7 @@
         "Music"
         "Pictures"
         "Videos"
+        ".scripts"
 
         # Pastas da steam
         ".steam"
@@ -51,7 +57,14 @@
 
         # TODO: coloque aqui pastas de coisas que vc quer persistir
       ];
+      #files = [ ".local/share/fish/fish_history" ];
     };
+  };
+
+  home.sessionVariables = {
+    TERMINAL = "alacritty";
+    GTK_IM_MODULE = "cedilla";
+    QT_IM_MODULE = "cedilla";
   };
 
   # Programas pro teu user que n tem um modulo do nix
@@ -60,7 +73,22 @@
     exa
     ranger
     dragon-drop
-    neofetch
+    bpytop
+    bat
+    rsync
+    gamemode
+    udiskie
+    escrotum
+    octave
+    feh
+    libnotify
+    killall
+    xorg.xkill
+    i3lock-color
+    xautolock
+    xclip
+    cava
+    starship
 
     # Programas de GUI
     google-chrome
@@ -68,6 +96,14 @@
     steam
     multimc
     discord
+    osu-lazer
+    opentabletdriver
+    mpv
+    dunst
+    rofi
+    flameshot
+    pavucontrol
+    pulseeffects-legacy
 
     # Fontes
     # Fira Sans
@@ -76,26 +112,13 @@
     fira-code
     # Fira Code Nerd Font
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    # Siji
+    siji
+    # Unifont
+    unifont
   ];
   # Registrar fontes instaladas
   fonts.fontconfig.enable = true;
-
-  # Habilitar e configurar alacritty
-  programs.alacritty = {
-    enable = true;
-  };
-
-  # Habilitar e configurar fish
-  programs.fish = {
-    enable = true;
-    shellAliases = {
-      rnix = "sudo nixos-rebuild switch --flake /dotfiles";
-      # Exemplo de abreviações configuradas pelo nix
-      ls = "exa";
-      v = "nvim";
-      vim = "nvim";
-    };
-  };
 
   # Habilitar pass, com suporte a OTP
   programs.password-store = {
@@ -109,7 +132,7 @@
     userName = "Fernando Marques";
     userEmail = "fernandomarques1505@gmail.com";
     signing = {
-      signByDefault = true;
+      signByDefault = false;
       # TODO: Colocar fingerprint da subchave de assinatura
       key = "";
     };

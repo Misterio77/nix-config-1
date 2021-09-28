@@ -5,6 +5,7 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      vim-surround
       auto-pairs
       editorconfig-vim
       nerdtree
@@ -14,7 +15,6 @@
       ranger-vim
       rust-vim
       undotree
-      vim-addon-mru
       vim-airline
       vim-airline-themes
       vim-bufferline
