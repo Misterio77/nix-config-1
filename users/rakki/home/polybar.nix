@@ -1,7 +1,7 @@
 { pkgs, config, ... }: {
   services.polybar = {
     enable = true;
-    script = "polybar mainbar &";
+    script = "polybar mainbar & polybar mainbar2 &";
     package = pkgs.polybarFull;
     config = {
       "bar/mainbar" = {
@@ -30,14 +30,14 @@
         module-margin-left = 1;
         module-margin-right = 2;
 
-        font-0 = "fixed:pixelsize=11;1";
-        font-1 = "unifont:fontformat=truetype:size=10:antialias=false;1";
-        font-2 = "siji:pixelsize=10;1";
-        font-3 = "FiraCode Nerd Font:pixelsize=13;1";
+        font-0 = "fixed:pixelsize=14;1";
+        font-1 = "unifont:fontformat=truetype:size=14:antialias=false;1";
+        font-2 = "siji:pixelsize=14;1";
+        font-3 = "FiraCode Nerd Font:pixelsize=16;1";
 
-        modules-left = "i3 filesystem network minicava";
+        modules-left = "i3 filesystem network";
         modules-center = "xwindow";
-        modules-right = "minemis gamemode ethminer pulseaudio memory temperature cpu nvidia-gpu date";
+        modules-right = "pulseaudio memory temperature cpu date";
 
         #tray-position = "right";
         #tray-padding = 2;
@@ -79,14 +79,14 @@
         module-margin-left = 1;
         module-margin-right = 2;
 
-        font-0 = "fixed:pixelsize=10;1";
-        font-1 = "unifont:fontformat=truetype:size=10:antialias=false;0";
-        font-2 = "siji:pixelsize=10;1";
-        font-3 = "FiraCode Nerd Font:pixelsize=12;1";
+        font-0 = "fixed:pixelsize=13;1";
+        font-1 = "unifont:fontformat=truetype:size=13:antialias=false;0";
+        font-2 = "siji:pixelsize=13;1";
+        font-3 = "FiraCode Nerd Font:pixelsize=15;1";
 
-        modules-left = "i3 filesystem network minicava";
+        modules-left = "i3 filesystem network";
         modules-center = "xwindow";
-        modules-right = "minemis gamemode ethminer pulseaudio memory temperature cpu nvidia-gpu date";
+        modules-right = "pulseaudio memory temperature cpu date";
 
         tray-position = "right";
         tray-padding = 2;
@@ -194,6 +194,17 @@
        cursor-click = "pointer";
        cursor-scroll = "ns-resize";
       };
+      "module/filesystem" = {
+        type = "internal/fs";
+        interval = 25;
+
+        mount-0 = "/nix";
+
+        label-mounted = "%used%";
+        label-mounted-foreground = "#8b9cbe";
+        label-unmounted = "%mountpoint% not mounted";
+        label-unmounted-foreground = "#ee17191E";
+      };
     };
     extraConfig = ''
       # Start Flavours
@@ -245,7 +256,7 @@
 
       [module/nvidia-gpu]
       type = custom/script
-      exec = ~/.scripts/gpunvidia/gpu.sh
+      exec = nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{ print "龍 ",""$1"""%"}'
       interval = 2
       ;format-underline = #00f6d9
       click-left = systemctl --user start ethminer
@@ -295,17 +306,6 @@
       label-indicator-margin = 1
       label-indicator-background = #ff3d81
       ;label-indicator-underline = #ff3d81
-
-      [module/filesystem]
-      type = internal/fs
-      interval = 25
-
-      mount-0 = /
-
-      label-mounted = %used%
-      label-mounted-foreground = #8b9cbe
-      label-unmounted = %mountpoint% not mounted
-      label-unmounted-foreground = #ee17191E
 
       [module/i3]
       type = internal/i3

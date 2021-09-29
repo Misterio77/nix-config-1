@@ -2,12 +2,14 @@
 
   # Importar nvim.nix
   imports = [
+    ./starship.nix
     ./fish.nix
     ./nvim.nix
     ./neofetch.nix
     ./i3.nix
     ./polybar.nix
     ./alacritty.nix
+    ./dunst.nix
   ];
 
   # Persistência
@@ -80,12 +82,9 @@
     udiskie
     escrotum
     octave
-    feh
     libnotify
     killall
     xorg.xkill
-    i3lock-color
-    xautolock
     xclip
     cava
     starship
@@ -110,6 +109,7 @@
     fira
     # Fira Code
     fira-code
+    fira-code-symbols
     # Fira Code Nerd Font
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     # Siji
@@ -132,9 +132,8 @@
     userName = "Fernando Marques";
     userEmail = "fernandomarques1505@gmail.com";
     signing = {
-      signByDefault = false;
-      # TODO: Colocar fingerprint da subchave de assinatura
-      key = "";
+      signByDefault = true;
+      key = "96FEAECF00C9EA0390CA35BF2A810BD6F5997B29";
     };
     extraConfig.init.defaultBranch = "main";
   };
@@ -142,15 +141,8 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    # TODO: Colocar keygrip da subchave de autenticação
-    sshKeys = [ ];
+    sshKeys = [ "DEAD5F7E7AA0BF26A2F59707D84E100417E1F3B2" ];
     pinentryFlavor = "gnome3";
-  };
-
-  # Habilitar KDEConnect e indicador na tray
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
   };
 
   # Usar tema do GTK no QT

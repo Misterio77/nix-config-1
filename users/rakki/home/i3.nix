@@ -9,11 +9,9 @@
         bars = [];
         startup = [
           { command = "xrandr --output HDMI-1 --mode '1920x1080' --pos 1920x130 --primary"; notification = false; }
-          { command = "sleep 1 && feh --bg-scale -z ~/Pictures/Wallpapers/aesthetic/aesthetic_wallpaper.png"; notification = false; }
-          { command = "setxkbmap -layout us"; notification = false; }
-          { command = "kdeconnect-indicator"; notification = false; }
-          { command = "xautolock -time 30 -locker $HOME/.scripts/i3lock.sh"; notification = false; }
-          { command = "$HOME/Documents/polybar/launch.sh"; always = true; notification = false; }
+          { command = "${pkgs.feh}/bin/feh --bg-scale -z ~/Pictures/Wallpapers/aesthetic/aesthetic_wallpaper.png"; notification = false; }
+          { command = "setxkbmap -layout us -variant intl"; notification = false; }
+          #{ command = "$HOME/Documents/polybar/launch.sh"; always = true; notification = false; }
         ];
         modifier = "Mod4";
         workspaceLayout = "default";
@@ -168,5 +166,14 @@
         set $ws9 9:9
       '';
     };
+  };
+  services.screen-locker = {
+    enable = true;
+    inactiveInterval = 30;
+    lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color -B sigma --inside-color=292828 --ring-color=333131 --keyhl-color=b30452 --date-color=b30452 --time-color=3d138a --ind-pos='2900:700' --radius=50 --time-size=15 --date-size=10 --ring-width=7";
+  };
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
   };
 }
