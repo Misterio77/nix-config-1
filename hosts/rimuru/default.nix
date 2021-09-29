@@ -40,8 +40,9 @@ fileSystems."/data".neededForBoot = true;
       # Habilitar GDM
       displayManager.gdm.enable = true;
       # Habilitar gnome
-      desktopManager.gnome.enable = true;
-
+      desktopManager.gnome.enable = false;
+      # Habilitar i3
+      windowManager.i3.enable = true;
     };
 
     # Fazer o promptzinho de senha do gpg funcionar
@@ -50,7 +51,7 @@ fileSystems."/data".neededForBoot = true;
 
   nix = {
     # Usar versão unstable do nix
-    package = pkgs.nixUnstable; 
+    package = pkgs.nixUnstable;
     # Usar flakes e o comando novo
     extraOptions = ''
       experimental-features = nix-command flakes ca-references

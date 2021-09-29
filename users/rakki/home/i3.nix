@@ -6,6 +6,7 @@
       enable = true;
       package = pkgs.i3-gaps;
       config = rec {
+        defaultWorkspace = "workspace number 1";
         bars = [];
         startup = [
           { command = "xrandr --output HDMI-1 --mode '1920x1080' --pos 1920x130 --primary"; notification = false; }
@@ -18,14 +19,35 @@
         workspaceAutoBackAndForth = true;
         window = {
           border = 2;
+          commands = [
+            { command = "floating enable, border pixel 1"; criteria = { title = "alsamixer"; } ; }
+            { command = "floating enable"; criteria = { title = "Files Transfer*"; } ; }
+            { command = "floating enable"; criteria = { title = "*event started"; } ; }
+            { command = "floating enable"; criteria = { title = "GWE*"; } ; }
+            { command = "floating enable"; criteria = { title = "NVIDIA X Server Settings"; } ; }
+            { command = "floating enable, border normal"; criteria = { class = "GParted"; } ; }
+            { command = "floating enable, resize set 500 150, move position center"; criteria = { instance = "AlacrittyFloatingSelector"; } ; }
+            { command = "floating enable, resize set 500 150, move position center"; criteria = { instance = "AlacrittyFloatPower"; } ; }
+            { command = "floating enable"; criteria = { instance = "AlacrittyFloatingOctave"; } ; }
+            { command = "floating enable"; criteria = { title = "Steam Guard - Computer Authorization Required"; } ; }
+            { command = "floating enable"; criteria = { title = "Raindrop.io*"; } ; }
+            { command = "floating enable, sticky enable, border normal"; criteria = { class = "Lxappearence"; } ; }
+            { command = "floating enable, sticky enable, border normal"; criteria = { class = "Nitrogen"; } ; }
+            { command = "floating enable"; criteria = { class = "Pavucontrol"; } ; }
+            { command = "floating enable"; criteria = { title = "PulseEffects"; } ; }
+            { command = "floating enable"; criteria = { class = "(?i)virtualbox"; } ; }
+            { command = "floating enable"; criteria = { title = "Upload*"; } ; }
+            { command = "move scratchpad"; criteria = { instance = "origin.exe"; } ; }
+            { command = "move scratchpad"; criteria = { title = "Origin"; } ; }
+          ];
         };
         terminal = "alacritty";
         menu = "${pkgs.rofi}/bin/rofi";
         gaps = {
-          top = 20;
-          bottom = 0;
-          outer = 12;
-          inner = 8;
+          top = 10;
+          bottom = 2;
+          outer = 2;
+          inner = 2;
         };
         keybindings =
           let
@@ -116,31 +138,6 @@
         set $base0E #b3a1e6
         set $base0F #ce6f8f
         # End Flavours
-
-
-        # Open specific applications in floating mode
-        for_window [title="alsamixer"] floating enable border pixel 1
-        for_window [class="Clipgrab"] floating enable
-        for_window [title="File Transfer*"] floating enable
-        for_window [title="*event started"] floating enable
-        for_window [title="GWE*"] floating enable
-        for_window [title="NVIDIA X Server Settings"] floating enable
-        for_window [class="GParted"] floating enable border normal
-        for_window [title="i3_help"] floating enable sticky enable border normal
-        for_window [instance="AlacrittyFloatingSelector"] floating enable, resize set 500 100, move position center
-        for_window [instance="AlacrittyFloatingPower"] floating enable, resize set 500 150, move position center
-        for_window [instance="AlacrittyFloatingOctave"] floating enable
-        for_window [title="Steam Guard - Computer Authorization Required"] floating enable
-        for_window [title="Raindrop.io*"] floating enable
-        for_window [class="Lxappearance"] floating enable sticky enable border normal
-        for_window [class="Nitrogen"] floating enable sticky enable border normal
-        for_window [class="Pavucontrol"] floating enable
-        for_window [title="PulseEffects"] floating enable
-        for_window [class="(?i)virtualbox"] floating enable border normal
-        for_window [title="Pudimcoin Core - Carteira"] floating enable
-        for_window [title="Upload*"] floating enable
-        for_window [instance="origin.exe"] move scratchpad
-        for_window [title="Origin"] move scratchpad
 
         # Theme colors
         # class                   border  backgr. text    indic.   child_border

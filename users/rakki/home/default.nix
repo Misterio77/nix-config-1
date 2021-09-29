@@ -1,6 +1,6 @@
 { pkgs, config, ... }: {
 
-  # Importar nvim.nix
+  # Importar arquivos .nix
   imports = [
     ./starship.nix
     ./fish.nix
@@ -11,6 +11,9 @@
     ./alacritty.nix
     ./dunst.nix
   ];
+
+  # Habilitar sway
+  wayland.windowManager.sway.enable = false;
 
   # Persistência
   home.persistence = {
@@ -59,7 +62,9 @@
 
         # TODO: coloque aqui pastas de coisas que vc quer persistir
       ];
-      #files = [ ".local/share/fish/fish_history" ];
+
+      # Persistir arquivos
+      files = [ ".local/share/fish/fish_history" ];
     };
   };
 
