@@ -36,9 +36,9 @@ fileSystems."/data".neededForBoot = true;
   services = {
     xserver = {
       # X11
-      enable = true;
+      enable = false;
       # Habilitar GDM
-      displayManager.gdm.enable = true;
+      displayManager.gdm.enable = false;
       # Habilitar gnome
       desktopManager.gnome.enable = false;
     };
@@ -111,6 +111,7 @@ fileSystems."/data".neededForBoot = true;
   };
 
   programs = {
+    dconf.enable = true;
     # Usar gpg como gerenciador de chaves SSH
     ssh.startAgent = false;
     gnupg.agent = {

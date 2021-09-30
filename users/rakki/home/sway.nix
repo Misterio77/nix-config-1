@@ -49,7 +49,7 @@ in rec {
       workspaceAutoBackAndForth = true;
       startup = [
         { command = "setxkbmap -layout us -variant intl"; }
-        { command = "swaymsg focus output HDMI-A-1"; }
+        { command = "swaymsg focus output HDMI-A-2"; }
         { command = "${waybar}"; }
         { command = "${swayidle}"; }
         #{ command = "${swayfader}"; }
@@ -70,6 +70,7 @@ in rec {
         "*" = {
           xkb_layout = "us";
           xkb_variant = "intl";
+          xkb_numlock = "enable";
         };
       };
       defaultWorkspace = "workspace number 1";
@@ -86,8 +87,8 @@ in rec {
       gaps = {
         top = 10;
         bottom = 10;
-        right = 8;
-        left = 8;
+        inner = 8;
+        outer = 8;
       };
       keybindings = lib.mkOptionDefault {
         "${modifier}+Return" = "exec ${terminal}";
@@ -103,6 +104,7 @@ in rec {
         "Print" = "exec ${grimshot} --notify copy area";
         "Shift+Print" = "exec ${grimshot} --notify copy window";
         "${modifier}+Shift+Return" = "exec ${alacritty} -t 'fish' --class AlacrittyFloatingOctave";
+        "${modifier}+Shift+r" = "exec ${alacritty} -t 'nix rebuild switch' --class AlacrittyFloatingNixRebuild --command sudo nixos-rebuild switch --flake /dotfiles";
 
         # audio
         #FIXME"Shift+XF86AudioMute" = "exec pactl set-default-sink alsa_output.usb-Logitech_Logitech_G633_Gaming_Headset_00000000-00.analog-stereo";
@@ -148,17 +150,19 @@ in rec {
         { title = "Raindrop.io*"; }
         { title = "Upload*"; }
         { title = "PulseEffects"; }
-        { app_id = "Pavucontrol"; }
+        { title = "Volume Control"; }
         { app_id = "GParted"; }
         { app_id = "AlacrittyFloatingSelector"; }
         { app_id = "AlacrittyFloatPower"; }
         { app_id = "AlacrittyFloatingOctave"; }
+        { app_id = "AlacrittyFloatingNixRebuild"; }
       ];
       window = {
         border = 3;
         commands = [
           { command = "resize set 500 150, move position center"; criteria = { app_id = "AlacrittyFloatingSelector"; }; }
           { command = "resize set 500 150, move position center"; criteria = { app_id = "AlacrittyFloatPower"; }; }
+          { command = "resize set 330 100, move position center"; criteria = { app_id = "AlacrittyFloatingNixRebuild"; }; }
           { command = "move scratchpad"; criteria = { app_id = "origin.exe"; }; }
           { command = "move scratchpad"; criteria = { title = "Origin"; }; }
         ];
@@ -198,4 +202,19 @@ in rec {
   programs.mako = {
     enable = true;
   };
+  programs.zsh.loginExtra = ''
+    if [[ "$(tty)" == /dev/tty1 ]]; then
+      exec sway
+    fi
+  '';
+  programs.fish.loginShellInit = ''
+    if test (tty) = /dev/tty1
+      exec sway
+    end
+  '';
+  programs.bash.profileExtra = ''
+    if [[ "$(tty)" == /dev/tty1 ]]; then
+      exec sway
+    fi
+  '';
 }

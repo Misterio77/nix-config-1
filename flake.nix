@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hardware.url = "github:nixos/nixos-hardware";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:misterio77/home-manager/personal";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = "github:RiscadoA/impermanence";
   };

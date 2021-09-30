@@ -8,6 +8,7 @@
     ./neofetch.nix
     ./i3.nix
     ./sway.nix
+    ./waybar.nix
     ./polybar.nix
     ./alacritty.nix
     ./dunst.nix
@@ -58,14 +59,14 @@
         # Chrome
         ".config/google-chrome"
 
-        # Fish_history
-        #".local/share/fish"
+       # Fish_history
+       #".local/share/fish"
 
-        # TODO: coloque aqui pastas de coisas que vc quer persistir
+       # TODO: coloque aqui pastas de coisas que vc quer persistir
       ];
 
-      # Persistir arquivos
-      #files = [];
+     # Persistir arquivos
+     #files = [];
     };
   };
 
