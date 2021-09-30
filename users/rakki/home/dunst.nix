@@ -4,7 +4,7 @@
     settings = {
       global = {
         frame_width = 2;
-        font = "monospace bold 3";
+        font = "monospace bold 12";
         markup = "full";
         format = "%s %p\n%b";
         sort = "yes";

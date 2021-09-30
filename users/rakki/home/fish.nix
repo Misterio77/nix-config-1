@@ -5,6 +5,7 @@
       # nix
       rnix = "sudo nixos-rebuild switch --flake /dotfiles";
       ncg = "nix-collect-garbage";
+      mhc = "man home-configuration.nix";
     };
     shellAliases = {
       # neofetch
@@ -40,7 +41,7 @@
       ytd-best = "youtube-dl -f mp4+bestaudio -o '~/Videos/%(title)s.%(ext)s' ";
       # misc
       pipes = "pipes.sh -t 3 -f 100 -R -r 0";
-      htop = "bpytop";
+      htop = "btm";
       cat = "bat";
     };
     functions.fish_greeting = "${pkgs.neofetch}/bin/neofetch";

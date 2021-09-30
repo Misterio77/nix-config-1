@@ -1,7 +1,7 @@
 { lib, pkgs, config, ... }: {
   # Habilitar e configurar i3
   xsession = {
-    enable = true;
+    enable = false;
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -10,7 +10,7 @@
         bars = [];
         startup = [
           { command = "xrandr --output HDMI-1 --mode '1920x1080' --pos 1920x130 --primary"; notification = false; }
-          { command = "${pkgs.feh}/bin/feh --bg-scale -z ~/Pictures/Wallpapers/aesthetic/aesthetic_wallpaper.png"; notification = false; }
+          { command = "${pkgs.feh}/bin/feh --bg-scale -z ~/Pictures/Wallpapers/aesthetic/aesthetic_wallpaper.png"; always = true; notification = false; }
           { command = "setxkbmap -layout us -variant intl"; notification = false; }
           #{ command = "$HOME/Documents/polybar/launch.sh"; always = true; notification = false; }
         ];
@@ -53,7 +53,7 @@
           let
             modifier = config.xsession.windowManager.i3.config.modifier;
           in lib.mkOptionDefault {
-            "${modifier}+Return" = "exec ${terminal}"; #TODO: como coloca pra usar a variavel "terminal"?
+            "${modifier}+Return" = "exec ${terminal}";
             "${modifier}+Shift+q" = "kill";
             "${modifier}+d" = "exec $HOME/.scripts/rofi/run.sh";
             "${modifier}+Ctrl+Shift+a" = "exec $HOME/.scripts/autoclick/autoclick.sh";

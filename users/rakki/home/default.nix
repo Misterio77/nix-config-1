@@ -7,13 +7,11 @@
     ./nvim.nix
     ./neofetch.nix
     ./i3.nix
+    ./sway.nix
     ./polybar.nix
     ./alacritty.nix
     ./dunst.nix
   ];
-
-  # Habilitar sway
-  wayland.windowManager.sway.enable = false;
 
   # Persistência
   home.persistence = {
@@ -60,11 +58,14 @@
         # Chrome
         ".config/google-chrome"
 
+        # Fish_history
+        #".local/share/fish"
+
         # TODO: coloque aqui pastas de coisas que vc quer persistir
       ];
 
       # Persistir arquivos
-      files = [ ".local/share/fish/fish_history" ];
+      #files = [];
     };
   };
 
@@ -81,6 +82,7 @@
     ranger
     dragon-drop
     bpytop
+    bottom
     bat
     rsync
     gamemode
@@ -92,7 +94,8 @@
     xorg.xkill
     xclip
     cava
-    starship
+    ncdu
+    imv
 
     # Programas de GUI
     google-chrome
@@ -103,7 +106,6 @@
     osu-lazer
     opentabletdriver
     mpv
-    dunst
     rofi
     flameshot
     pavucontrol
@@ -164,12 +166,12 @@
       size = 12;
     };
     iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
+      name = "BeautyLine";
+      package = pkgs.beauty-line-icon-theme;
     };
     theme = {
-      name = "Materia-dark";
-      package = pkgs.materia-theme;
+      name = "Dracula";
+      package = pkgs.dracula-theme;
     };
   };
 

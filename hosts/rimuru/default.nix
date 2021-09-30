@@ -7,7 +7,7 @@
     hardware.nixosModules.common-cpu-intel
 
     # Importar config para gpu da nvidia
-    hardware.nixosModules.common-gpu-nvidia
+    #hardware.nixosModules.common-gpu-nvidia
 
     # Importar impermanence (programinha que monta as pastas persistidas)
     impermanence.nixosModules.impermanence
@@ -41,8 +41,6 @@ fileSystems."/data".neededForBoot = true;
       displayManager.gdm.enable = true;
       # Habilitar gnome
       desktopManager.gnome.enable = false;
-      # Habilitar i3
-      windowManager.i3.enable = true;
     };
 
     # Fazer o promptzinho de senha do gpg funcionar

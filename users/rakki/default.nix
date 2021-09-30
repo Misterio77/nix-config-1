@@ -13,4 +13,7 @@
     passwordFile = "/data/home/rakki/.password";
   };
 
+  # Allow swaylock
+  security.pam.services.swaylock = { };
+
 }
