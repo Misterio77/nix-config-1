@@ -11,6 +11,6 @@ in {
     timeout 310 '${pactl} set-source-mute @DEFAULT_SOURCE@ yes' resume '${pactl} set-source-mute @DEFAULT_SOURCE@ no'
 
     timeout 20  '${pgrep} -x swaylock && swaymsg "output * dpms off"' resume  '${pgrep} -x swaylock && swaymsg "output * dpms on"'
-    timeout 620 'swaymsg "output * dpms off"' resume  'swaymsg "output * dpms on"'
+    timeout 320 'swaymsg "output * dpms off"' resume  'swaymsg "output * dpms on"'
   '';
 }
