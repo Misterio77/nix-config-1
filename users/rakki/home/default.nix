@@ -6,14 +6,15 @@
     ./fish.nix
     ./nvim.nix
     ./neofetch.nix
-    ./i3.nix
+    #./i3.nix
     ./sway.nix
     ./swaylock.nix
     ./swayidle.nix
     ./waybar.nix
-    ./polybar.nix
+    ./mako.nix
+    #./polybar.nix
     ./alacritty.nix
-    ./dunst.nix
+    #./dunst.nix
   ];
 
   # Persistência

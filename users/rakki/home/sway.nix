@@ -11,6 +11,7 @@ let
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
   swayidle = "${pkgs.swayidle}/bin/swayidle";
+  mako = "${pkgs.mako}/bin/mako";
   #swayfader = "${pkgs.swayfader}/bin/swayfader";
   wofi = "${pkgs.wofi}/bin/wofi";
 
@@ -57,14 +58,17 @@ in rec {
         # set volume to 100%
         { command = "pactl set-sink-volume @DEFAULT_SINK@ 100%"; }
 
-        # starts waybar
+        # start waybar
         { command = "${waybar}"; }
 
         # swaylock on startup
         { command = "${swaylock} -i $HOME/Pictures/Wallpapers/aesthetic/among_trees___definitely_not_a_tree_by_dadaws_de2bf6g.jpg"; }
 
-        # starts swayidle
+        # start swayidle
         { command = "${swayidle} -w"; }
+
+        # start mako
+        { command = "${mako} -c $HOME/.config/mako/config"; }
 
         #{ command = "${swayfader}"; }
       ];
@@ -212,9 +216,6 @@ in rec {
         };
       };
     };
-  };
-  programs.mako = {
-    enable = true;
   };
   programs.zsh.loginExtra = ''
     if [[ "$(tty)" == /dev/tty1 ]]; then
