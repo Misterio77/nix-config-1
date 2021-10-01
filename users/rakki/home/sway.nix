@@ -48,10 +48,24 @@ in rec {
       terminal = "${alacritty}";
       workspaceAutoBackAndForth = true;
       startup = [
+        # set keyboard layout to international
         { command = "setxkbmap -layout us -variant intl"; }
+
+        # set initial focus on main monitor
         { command = "swaymsg focus output HDMI-A-2"; }
+
+        # set volume to 100%
+        { command = "pactl set-sink-volume @DEFAULT_SINK@ 100%"; }
+
+        # starts waybar
         { command = "${waybar}"; }
-        { command = "${swayidle}"; }
+
+        # swaylock on startup
+        { command = "${swaylock} -i $HOME/Pictures/Wallpapers/aesthetic/among_trees___definitely_not_a_tree_by_dadaws_de2bf6g.jpg"; }
+
+        # starts swayidle
+        { command = "${swayidle} -w"; }
+
         #{ command = "${swayfader}"; }
       ];
       output = {
@@ -113,7 +127,7 @@ in rec {
         "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
         "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
-        #FIXME"Ctrl+m" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+        "Ctrl+m" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
         "${modifier}+Ctrl+m" = "exec pavucontrol";
         "${modifier}+Ctrl+Shift+m" = "exec pulseeffects";
         "${modifier}+q" = "split toggle";

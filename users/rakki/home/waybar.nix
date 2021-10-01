@@ -79,15 +79,15 @@ in rec {
           critical-threshold = 80;
         };
         tray = {
-          icon-size = 21;
-          spacing = 8;
+          icon-size = 18;
+          spacing = 0;
         };
         "sway/window" = { max-lenght = 40; };
         "sway/workspaces" = {
           format = "{icon} {name}";
           format-icons = {
-            focused = "綠  ";
-            default = "祿  ";
+            focused = "綠 ";
+            default = "祿 ";
         };
       };
     };

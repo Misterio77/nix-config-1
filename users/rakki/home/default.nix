@@ -8,6 +8,8 @@
     ./neofetch.nix
     ./i3.nix
     ./sway.nix
+    ./swaylock.nix
+    ./swayidle.nix
     ./waybar.nix
     ./polybar.nix
     ./alacritty.nix
@@ -31,8 +33,8 @@
         ".scripts"
 
         # Pastas da steam
-        ".steam"
-        ".local/share/Steam"
+        #".steam"
+        #".local/share/Steam"
 
         # Pastas do lutris
         ".config/lutris"
@@ -101,7 +103,7 @@
     # Programas de GUI
     google-chrome
     lutris
-    steam
+    #steam
     multimc
     discord
     osu-lazer
