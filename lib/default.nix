@@ -10,6 +10,7 @@
         impermanence = inputs.impermanence;
         nixpkgs = inputs.nixpkgs;
         nix-colors = inputs.nix-colors;
+        misterio-nur = inputs.misterio-nur;
       };
       # Import host config
       modules = [ ../hosts/${host} ]

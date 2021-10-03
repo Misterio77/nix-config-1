@@ -6,6 +6,7 @@
       rnix = "sudo nixos-rebuild switch --flake /dotfiles";
       ncg = "nix-collect-garbage";
       mhc = "man home-configuration.nix";
+      xhost = "xhost si:localuser:root";
     };
     shellAliases = {
       # neofetch

@@ -110,6 +110,7 @@
     imv
     jq
     jp2a
+    xlibs.xhost
 
     # Programas de GUI
     google-chrome

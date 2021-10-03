@@ -1,4 +1,4 @@
-{ config, pkgs, nixpkgs, hardware, impermanence, nix-colors, ... }: {
+{ config, pkgs, nixpkgs, hardware, impermanence, nix-colors, misterio-nur, ... }: {
   imports = [
     # Importar configuração gerada para os discos
     ./hardware-configuration.nix
@@ -14,6 +14,9 @@
   ];
 
 fileSystems."/data".neededForBoot = true;
+
+
+nixpkgs.overlays = [ misterio-nur.overlay ];
 
   # Persistir algumas pastas do sistema
   # Pra os timers do systemd e logs funcionarem certo entre reboots
@@ -99,7 +102,7 @@ fileSystems."/data".neededForBoot = true;
       "abi.vsyscall32" = 0;
     };
     # Suporte ao btrfs no boot
-    supportedFilesystems = [ "btrfs" ];
+    supportedFilesystems = [ "btrfs" "ntfs" ];
     # Configurações do boot loader
     loader = {
       # Não mostrar se não segurar shift

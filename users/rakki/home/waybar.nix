@@ -1,4 +1,7 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+let
+  minicava = "${pkgs.minicava}/bin/minicava";
+in {
   programs.waybar = let colorscheme = config.colorscheme; in {
     enable = true;
     settings = [{
@@ -9,6 +12,7 @@
         "sway/workspaces"
         "disk"
         "network"
+        "custom/minicava"
       ];
       modules-center = [ "sway/window" ];
       modules-right = [
@@ -79,6 +83,10 @@
             focused = "綠 ";
             default = "祿 ";
         };
+      };
+      "custom/minicava" = {
+        "exec" = "${minicava}";
+        "restart-interval" = 5;
       };
     };
   }];

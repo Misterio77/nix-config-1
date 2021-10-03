@@ -1,7 +1,7 @@
 { lib, pkgs, config, nix-colors, ... }:
 
 let
-  wallpaper = "$HOME/Pictures/Wallpapers/aesthetic/aesthetic_wallpaper.png";
+  wallpaper = "/dotfiles/users/rakki/home/wallpaper/wallpaper.png";
   alacritty = "${pkgs.alacritty}/bin/alacritty";
   nautilus = "${pkgs.gnome.nautilus}/bin/nautilus";
   kdeconnect = "${pkgs.kdeconnect}/bin/kdeconnect-indicator";
@@ -13,7 +13,7 @@ let
   swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
   swayidle = "${pkgs.swayidle}/bin/swayidle";
   mako = "${pkgs.mako}/bin/mako";
-  #swayfader = "${pkgs.swayfader}/bin/swayfader";
+  swayfader = "${pkgs.swayfader}/bin/swayfader";
   wofi = "${pkgs.wofi}/bin/wofi";
 in rec {
   home.packages = with pkgs; [ wl-clipboard wf-recorder slurp ];
@@ -56,7 +56,11 @@ in rec {
         # start kdeconnect
         { command = "dbus-launch ${kdeconnect}"; }
 
-        #{ command = "${swayfader}"; }
+        # link fish history
+        { command = "ln -s $HOME/Documents/fish_history $HOME/.local/share/fish/"; }
+
+        # start swayfader
+        { command = "${swayfader}"; }
       ];
       output = {
         HDMI-A-1 = {

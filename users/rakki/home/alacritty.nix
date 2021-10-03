@@ -64,6 +64,10 @@
             size = 12.0;
             normal.family = "FiraCode Nerd Font";
           };
+          padding = {
+            x = 8;
+            y = 8;
+          };
         };
       };
     };
