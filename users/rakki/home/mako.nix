@@ -1,5 +1,5 @@
-{ pkgs, config, ... }: {
-  programs.mako = {
+{ pkgs, config, nix-colors, ... }: {
+  programs.mako = let colorscheme = config.colorscheme; in {
     enable = true;
     font = "Fira Sans 12";
     iconPath = "${pkgs.beauty-line-icon-theme}/share/icons/beauty-line";
@@ -10,9 +10,9 @@
     borderSize = 2;
     output = "HDMI-A-1";
     defaultTimeout = 10000;
-    backgroundColor = "#1b1c36dd";
-    borderColor = "#c1c3ccdd";
-    textColor = "#686f9add";
+    backgroundColor = "#${colorscheme.colors.base00}dd";
+    borderColor = "#${colorscheme.colors.base03}dd";
+    textColor = "#${colorscheme.colors.base05}dd";
 
     extraConfig = ''
       text-alignment=center

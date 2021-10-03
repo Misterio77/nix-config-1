@@ -1,9 +1,10 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config, nix-colors, ... }:
 
 let
   wallpaper = "$HOME/Pictures/Wallpapers/aesthetic/aesthetic_wallpaper.png";
   alacritty = "${pkgs.alacritty}/bin/alacritty";
   nautilus = "${pkgs.gnome.nautilus}/bin/nautilus";
+  kdeconnect = "${pkgs.kdeconnect}/bin/kdeconnect-indicator";
   waybar = "${pkgs.waybar}/bin/waybar";
   grimshot = "${pkgs.sway-contrib.grimshot}/bin/grimshot";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
@@ -14,23 +15,6 @@ let
   mako = "${pkgs.mako}/bin/mako";
   #swayfader = "${pkgs.swayfader}/bin/swayfader";
   wofi = "${pkgs.wofi}/bin/wofi";
-
-  base00 = "#16172d";
-  base01 = "#1b1c36";
-  base02 = "#30365F";
-  base03 = "#686f9a";
-  base04 = "#818596";
-  base05 = "#ecf0c1";
-  base06 = "#c1c3cc";
-  base07 = "#ffffff";
-  base08 = "#e33400";
-  base09 = "#e39400";
-  base0A = "#f2ce00";
-  base0B = "#5ccc96";
-  base0C = "#00a3cc";
-  base0D = "#7a5ccc";
-  base0E = "#b3a1e6";
-  base0F = "#ce6f8f";
 in rec {
   home.packages = with pkgs; [ wl-clipboard wf-recorder slurp ];
   home.sessionVariables = {
@@ -38,8 +22,7 @@ in rec {
     QT_QPA_PLATFORM = "wayland";
     TERMINAL = "alacritty";
   };
-
-  wayland.windowManager.sway = {
+  wayland.windowManager.sway = let colorscheme = config.colorscheme; in {
     enable = true;
     wrapperFeatures.gtk = true;
     config = rec {
@@ -62,13 +45,16 @@ in rec {
         { command = "${waybar}"; }
 
         # swaylock on startup
-        { command = "${swaylock} -i $HOME/Pictures/Wallpapers/aesthetic/among_trees___definitely_not_a_tree_by_dadaws_de2bf6g.jpg"; }
+        { command = "${swaylock}"; }
 
         # start swayidle
         { command = "${swayidle} -w"; }
 
         # start mako
         { command = "${mako} -c $HOME/.config/mako/config"; }
+
+        # start kdeconnect
+        { command = "dbus-launch ${kdeconnect}"; }
 
         #{ command = "${swayfader}"; }
       ];
@@ -118,16 +104,15 @@ in rec {
         "${modifier}+Shift+e" = "exec ${nautilus}";
         "${modifier}+c" = "exec ${alacritty} -t 'Octave' --class AlacrittyFloatingOctave --command octave";
         "${modifier}+l" = "exec ${swaylock}";
-        #FIXME: "${modifier}+0" = "exec $HOME/.scripts/power/power";
         "Print" = "exec ${grimshot} --notify copy area";
         "Shift+Print" = "exec ${grimshot} --notify copy window";
         "${modifier}+Shift+Return" = "exec ${alacritty} -t 'fish' --class AlacrittyFloatingOctave";
         "${modifier}+Shift+r" = "exec ${alacritty} -t 'nix rebuild switch' --class AlacrittyFloatingNixRebuild --command sudo nixos-rebuild switch --flake /dotfiles";
 
         # audio
-        #FIXME"Shift+XF86AudioMute" = "exec pactl set-default-sink alsa_output.usb-Logitech_Logitech_G633_Gaming_Headset_00000000-00.analog-stereo";
-        #FIXME"Shift+XF86AudioLowerVolume" = "exec pactl set-default-sink alsa_output.pci-0000_01_00.1.hdmi-stereo";
-        #FIXME"Shift+XF86AudioRaiseVolume" = "exec pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo";
+        "Shift+XF86AudioMute" = "exec pactl set-default-sink alsa_output.usb-Logitech_Logitech_G633_Gaming_Headset_00000000-00.analog-stereo";
+        "Shift+XF86AudioLowerVolume" = "exec pactl set-default-sink alsa_output.pci-0000_01_00.1.hdmi-stereo-extra";
+        "Shift+XF86AudioRaiseVolume" = "exec pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo";
         "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
         "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
@@ -187,32 +172,32 @@ in rec {
       };
       colors = {
         focused = {
-          border = "${base0B}";
-          childBorder = "${base0B}";
-          indicator = "${base09}";
-          background = "${base00}";
-          text = "${base05}";
+          border = "#${colorscheme.colors.base0B}";
+          childBorder = "#${colorscheme.colors.base0B}";
+          indicator = "#${colorscheme.colors.base09}";
+          background = "#${colorscheme.colors.base00}";
+          text = "#${colorscheme.colors.base05}";
         };
         unfocused = {
-          border = "${base02}";
-          childBorder = "${base02}";
-          indicator = "${base02}";
-          background = "${base00}";
-          text = "${base04}";
+          border = "#${colorscheme.colors.base02}";
+          childBorder = "#${colorscheme.colors.base02}";
+          indicator = "#${colorscheme.colors.base02}";
+          background = "#${colorscheme.colors.base00}";
+          text = "#${colorscheme.colors.base04}";
         };
         focusedInactive = {
-          border = "${base01}";
-          childBorder = "${base01}";
-          indicator = "${base01}";
-          background = "${base00}";
-          text = "${base04}";
+          border = "#${colorscheme.colors.base01}";
+          childBorder = "#${colorscheme.colors.base01}";
+          indicator = "#${colorscheme.colors.base01}";
+          background = "#${colorscheme.colors.base00}";
+          text = "#${colorscheme.colors.base04}";
         };
         urgent = {
-          border = "${base0C}";
-          childBorder = "${base0C}";
-          indicator = "${base0C}";
-          background = "${base0C}";
-          text = "${base04}";
+          border = "#${colorscheme.colors.base0C}";
+          childBorder = "#${colorscheme.colors.base0C}";
+          indicator = "#${colorscheme.colors.base0C}";
+          background = "#${colorscheme.colors.base0C}";
+          text = "#${colorscheme.colors.base04}";
         };
       };
     };

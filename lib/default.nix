@@ -9,6 +9,7 @@
         hardware = inputs.hardware;
         impermanence = inputs.impermanence;
         nixpkgs = inputs.nixpkgs;
+        nix-colors = inputs.nix-colors;
       };
       # Import host config
       modules = [ ../hosts/${host} ]
@@ -19,11 +20,11 @@
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
-              extraSpecialArgs = { inherit host; };
+              extraSpecialArgs = { inherit host; nix-colors = inputs.nix-colors; };
               useGlobalPkgs = true;
               useUserPackages = true;
               sharedModules =
-                [ inputs.impermanence.nixosModules.home-manager.impermanence ];
+                [ inputs.impermanence.nixosModules.home-manager.impermanence inputs.nix-colors.homeManagerModule ];
               users = builtins.listToAttrs (inputs.nixpkgs.lib.forEach users (user: {
                 name = user;
                 value = ../users/${user}/home;

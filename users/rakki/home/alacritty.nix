@@ -1,57 +1,61 @@
-{ config, ... }: {
-  programs = {
+{ config, nix-colors, ... }: {
+  programs = let colorscheme = config.colorscheme; in {
     alacritty = {
       enable = true;
       settings = {
         colors = {
           primary = {
-            background = "0x16172d";
-            foreground = "0xecf0c1";
+            background = "#${colorscheme.colors.base00}";
+            foreground = "#${colorscheme.colors.base05}";
+          };
+          cursor = {
+            background = "#${colorscheme.colors.base00}";
+            foreground = "#${colorscheme.colors.base05}";
           };
           normal = {
-            black = "0x16172d";
-            red = "0xe33400";
-            green = "0x5ccc96";
-            yellow = "0xf2ce00";
-            blue = "0x7a5ccc";
-            magenta = "0xb3a1e6";
-            cyan = "0x00a3cc";
-            white = "0xecf0c1";
+            black = "#${colorscheme.colors.base00}";
+            red = "#${colorscheme.colors.base08}";
+            green = "#${colorscheme.colors.base08}";
+            yellow = "#${colorscheme.colors.base0A}";
+            blue = "#${colorscheme.colors.base0D}";
+            magenta = "#${colorscheme.colors.base0E}";
+            cyan = "#${colorscheme.colors.base0C}";
+            white = "#${colorscheme.colors.base05}";
           };
           bright = {
-            black = "0x686f9a";
-            red = "0xe33400";
-            green = "0x5ccc96";
-            yellow = "0xf2ce00";
-            blue = "0x7a5ccc";
-            magenta = "0xb3a1e6";
-            cyan = "0x00a3cc";
-            white = "0xffffff";
+            black = "#${colorscheme.colors.base03}";
+            red = "#${colorscheme.colors.base08}";
+            green = "#${colorscheme.colors.base08}";
+            yellow = "#${colorscheme.colors.base0A}";
+            blue = "#${colorscheme.colors.base0D}";
+            magenta = "#${colorscheme.colors.base0E}";
+            cyan = "#${colorscheme.colors.base0C}";
+            white = "#${colorscheme.colors.base07}";
           };
           indexed_colors = [
             {
               index = 16;
-              color = "0xe39400";
+              color = "#${colorscheme.colors.base09}";
             }
             {
               index = 17;
-              color = "0xce6f8f";
+              color = "#${colorscheme.colors.base0F}";
             }
             {
               index = 18;
-              color = "0x1b1c36";
+              color = "#${colorscheme.colors.base01}";
             }
             {
               index = 19;
-              color = "0x30365F";
+              color = "#${colorscheme.colors.base02}";
             }
             {
               index = 20;
-              color = "0x818596";
+              color = "#${colorscheme.colors.base04}";
             }
             {
               index = 21;
-              color = "0xc1c3cc";
+              color = "#${colorscheme.colors.base06}";
             }
           ];
         };

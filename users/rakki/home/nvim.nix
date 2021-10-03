@@ -40,7 +40,6 @@
       set clipboard=unnamedplus               " Copy paste between vim and everything else
       set cmdheight=2                         " More space for displaying messages
       set conceallevel=0                      " So that I can see `` in markdown files
-      set cursorline                          " Enable highlighting of the current line
       set encoding=utf-8                      " The encoding displayed
       set expandtab                           " Converts tabs to spaces
       set fileencoding=utf-8                  " The encoding written to file

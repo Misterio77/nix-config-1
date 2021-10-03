@@ -4,8 +4,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     hardware.url = "github:nixos/nixos-hardware";
+    nix-colors.url = "github:misterio77/nix-colors";
 
-    home-manager.url = "github:misterio77/home-manager/personal";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = "github:RiscadoA/impermanence";
   };

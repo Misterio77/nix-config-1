@@ -1,8 +1,9 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, nix-colors, ... }: {
 
   # Importar arquivos .nix
   imports = [
     ./starship.nix
+    ./gtk.nix
     ./fish.nix
     ./nvim.nix
     ./neofetch.nix
@@ -16,6 +17,13 @@
     ./alacritty.nix
     #./dunst.nix
   ];
+
+  # Color scheme
+  colorscheme = nix-colors.colorSchemes.${import ./current-scheme.nix};
+
+  # bin scripts
+  home.file.bin.source = ./scripts;
+  home.sessionPath = [ "${config.home.homeDirectory}/bin" ];
 
   # Persistência
   home.persistence = {
@@ -100,6 +108,8 @@
     cava
     ncdu
     imv
+    jq
+    jp2a
 
     # Programas de GUI
     google-chrome
@@ -114,6 +124,7 @@
     flameshot
     pavucontrol
     pulseeffects-legacy
+    kdeconnect
 
     # Fontes
     # Fira Sans
@@ -161,22 +172,4 @@
     enable = true;
     platformTheme = "gtk";
   };
-
-  # GTK, fonte, icones e tema
-  gtk = {
-    enable = true;
-    font = {
-      name = "Fira Sans";
-      size = 12;
-    };
-    iconTheme = {
-      name = "BeautyLine";
-      package = pkgs.beauty-line-icon-theme;
-    };
-    theme = {
-      name = "Dracula";
-      package = pkgs.dracula-theme;
-    };
-  };
-
 }

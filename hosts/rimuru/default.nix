@@ -1,4 +1,4 @@
-{ config, pkgs, nixpkgs, hardware, impermanence, ... }: {
+{ config, pkgs, nixpkgs, hardware, impermanence, nix-colors, ... }: {
   imports = [
     # Importar configuração gerada para os discos
     ./hardware-configuration.nix
@@ -56,7 +56,10 @@ fileSystems."/data".neededForBoot = true;
       warn-dirty = false
     '';
     # Usar nixpkgs setado na flake
-    registry.nixpkgs.flake = nixpkgs;
+    registry = {
+      nixpkgs.flake = nixpkgs;
+      nix-colors.flake = nix-colors;
+    };
     # Automaticamente otimizar a /nix
     autoOptimiseStore = true;
     # Automaticamente apagar pacotes que não tão em uso

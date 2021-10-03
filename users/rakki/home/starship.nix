@@ -22,6 +22,12 @@
       style = "bold #c41b5c";
       format = "[$hostname]($style) in ";
     };
+    nix_shell = {
+      impure_msg = "";
+      pure_msg = "λ ";
+      symbol = "";
+      format = "via [$symbol$state( $name)]($style) ";
+    };
     cmd_duration = {
       disabled = false;
       min_time = 0;
