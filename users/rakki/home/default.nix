@@ -169,7 +169,7 @@
     enable = true;
     enableSshSupport = true;
     sshKeys = [ "DEAD5F7E7AA0BF26A2F59707D84E100417E1F3B2" ];
-    pinentryFlavor = "gtk2";
+    pinentryFlavor = "gnome3";
   };
 
   # Usar tema do GTK no QT

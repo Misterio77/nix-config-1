@@ -15,7 +15,6 @@
 
 fileSystems."/data".neededForBoot = true;
 
-
 nixpkgs.overlays = [ misterio-nur.overlay ];
 
   # Persistir algumas pastas do sistema
