@@ -3,6 +3,7 @@
 let
   wallpaper = "/dotfiles/users/rakki/home/wallpaper/wallpaper.png";
   alacritty = "${pkgs.alacritty}/bin/alacritty";
+  discocss = "${pkgs.discocss}/bin/discocss";
   nautilus = "${pkgs.gnome.nautilus}/bin/nautilus";
   kdeconnect = "${pkgs.kdeconnect}/bin/kdeconnect-indicator";
   waybar = "${pkgs.waybar}/bin/waybar";

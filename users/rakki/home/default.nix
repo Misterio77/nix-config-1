@@ -4,6 +4,7 @@
   imports = [
     ./starship.nix
     ./gtk.nix
+    ./discord.nix
     ./fish.nix
     ./nvim.nix
     ./neofetch.nix
@@ -25,7 +26,7 @@
   home.file.bin.source = ./scripts;
   home.sessionPath = [ "${config.home.homeDirectory}/bin" ];
 
-  # Persistência
+  # Persistência de coisas sem options
   home.persistence = {
     "/data/home/rakki" = {
       # Permitir que o root acesse
@@ -52,8 +53,11 @@
         # Dados do multimc
         ".local/share/multimc"
 
-        # Pastas do discord
-        ".config/discord"
+        # Dados do discord
+        #".config/discord"
+
+        # Dados do spotify
+        ".config/spotify"
 
         # Chaves do gpg
         ".gnupg"
@@ -70,8 +74,8 @@
         # Chrome
         ".config/google-chrome"
 
-       # Fish_history
-       #".local/share/fish"
+        # Nix-index cache
+        ".cache/nix-index"
 
        # TODO: coloque aqui pastas de coisas que vc quer persistir
       ];
@@ -104,7 +108,6 @@
     libnotify
     killall
     xorg.xkill
-    xclip
     cava
     ncdu
     imv
@@ -114,10 +117,11 @@
 
     # Programas de GUI
     google-chrome
+    discord
+    spotify
     lutris
     #steam
     multimc
-    discord
     osu-lazer
     opentabletdriver
     mpv
@@ -125,7 +129,7 @@
     flameshot
     pavucontrol
     pulseeffects-legacy
-    kdeconnect
+    comma
 
     # Fontes
     # Fira Sans
@@ -165,12 +169,15 @@
     enable = true;
     enableSshSupport = true;
     sshKeys = [ "DEAD5F7E7AA0BF26A2F59707D84E100417E1F3B2" ];
-    pinentryFlavor = "gnome3";
+    pinentryFlavor = "gtk2";
   };
 
   # Usar tema do GTK no QT
   qt = {
     enable = true;
     platformTheme = "gtk";
+  };
+  programs.nix-index = {
+    enable = true;
   };
 }

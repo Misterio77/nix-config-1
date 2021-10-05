@@ -128,10 +128,6 @@ nixpkgs.overlays = [ misterio-nur.overlay ];
     gamemode.enable = true;
     # fuse
     fuse.userAllowOther = true;
-    # KDEConnect
-    kdeconnect.enable = true;
-    # Steam
-    steam.enable = true;
     # Configurações globais do fish
     # (precisa aqui pra configuração do usuário ter as completions dos programas do sistema)
     fish = {
