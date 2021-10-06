@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+woosh=$(nix eval --raw nix-colors\#colorSchemes --apply 's: builtins.concatStringsSep "\n" (builtins.attrNames s)' | fzf) && nixscheme $woosh

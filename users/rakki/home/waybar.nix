@@ -16,6 +16,7 @@ in {
       ];
       modules-center = [ "sway/window" ];
       modules-right = [
+        "custom/themes"
         "idle_inhibitor"
         "pulseaudio"
         "memory"
@@ -88,6 +89,12 @@ in {
         "exec" = "${minicava}";
         "restart-interval" = 5;
       };
+      "custom/themes" = {
+        exec = "echo '{\"text\": \"  \", \"tooltip\": \"${colorscheme.name}\"}'";
+        return-type = "json";
+        interval = 5;
+        on-click = "alacritty -t 'themes' --class AlacrittyFloatingSelector --command /dotfiles/users/rakki/home/scripts/themeselector";
+      };
     };
   }];
     style = ''
@@ -110,7 +117,6 @@ in {
       background-color: #${colorscheme.colors.base02};
       color: #${colorscheme.colors.base04};
       }
-
     '';
   };
 }

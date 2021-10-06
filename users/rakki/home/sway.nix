@@ -5,7 +5,7 @@ let
   alacritty = "${pkgs.alacritty}/bin/alacritty";
   discocss = "${pkgs.discocss}/bin/discocss";
   nautilus = "${pkgs.gnome.nautilus}/bin/nautilus";
-  kdeconnect = "${pkgs.kdeconnect}/bin/kdeconnect-indicator";
+  kdeconnect = "${pkgs.kdeconnect}/bin/kdeconnect";
   waybar = "${pkgs.waybar}/bin/waybar";
   grimshot = "${pkgs.sway-contrib.grimshot}/bin/grimshot";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
@@ -55,7 +55,7 @@ in rec {
         { command = "${mako} -c $HOME/.config/mako/config"; }
 
         # start kdeconnect
-        { command = "dbus-launch ${kdeconnect}"; }
+        { command = "dbus-launch ${kdeconnect}-indicator"; }
 
         # link fish history
         { command = "ln -s $HOME/Documents/fish_history $HOME/.local/share/fish/"; }

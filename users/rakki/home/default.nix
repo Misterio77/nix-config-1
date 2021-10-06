@@ -114,6 +114,7 @@
     jq
     jp2a
     xlibs.xhost
+    fzf
 
     # Programas de GUI
     google-chrome
@@ -130,6 +131,7 @@
     pavucontrol
     pulseeffects-legacy
     comma
+    kdeconnect
 
     # Fontes
     # Fira Sans
