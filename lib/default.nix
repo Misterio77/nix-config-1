@@ -13,7 +13,7 @@
         misterio-nur = inputs.misterio-nur;
       };
       # Import host config
-      modules = [ ../hosts/${host} ]
+      modules = [ ../hosts/${host} ../overlays ]
       # Plus system-level user config for each user
         ++ inputs.nixpkgs.lib.forEach users (user: ../users/${user})
          # And each user's home-manager config
